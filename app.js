@@ -16,8 +16,6 @@ const candyColors = [
     'url(beers/amstel-removebg-preview.png)'
   ]
 
-
-//create your board
 function createBoard() {
   for (let i = 0; i < width*width; i++) {
     const square = document.createElement('div')
@@ -31,7 +29,6 @@ function createBoard() {
 }
 createBoard()
 
-// Dragging the Candy
 let colorBeingDragged
 let colorBeingReplaced
 let squareIdBeingDragged
@@ -48,7 +45,6 @@ start.addEventListener('click',startgame);
 function dragStart(){
     colorBeingDragged = this.style.backgroundImage
     squareIdBeingDragged = parseInt(this.id)
-    // this.style.backgroundImage = ''
 }
 
 function dragOver(e) {
@@ -71,7 +67,6 @@ function dragDrop() {
 }
 
 function dragEnd() {
-    //What is a valid move?
     let validMoves = [squareIdBeingDragged -1 , squareIdBeingDragged -width, squareIdBeingDragged +1, squareIdBeingDragged +width]
     let validMove = validMoves.includes(squareIdBeingReplaced)
 
@@ -83,7 +78,6 @@ function dragEnd() {
     } else  squares[squareIdBeingDragged].style.backgroundImage = colorBeingDragged
 }
 
-//drop candies once some have been cleared
 function moveIntoSquareBelow() {
     for (i = 0; i < 55; i ++) {
         if(squares[i + width].style.backgroundImage === '') {
@@ -100,8 +94,6 @@ function moveIntoSquareBelow() {
 }
 
 
-///Checking for Matches
-//for row of Four
   function checkRowForFour() {
     for (i = 0; i < 60; i ++) {
       let rowOfFour = [i, i+1, i+2, i+3]
@@ -122,7 +114,6 @@ function moveIntoSquareBelow() {
   }
   checkRowForFour()
 
-//for column of Four
   function checkColumnForFour() {
     for (i = 0; i < 39; i ++) {
       let columnOfFour = [i, i+width, i+width*2, i+width*3]
@@ -140,7 +131,6 @@ function moveIntoSquareBelow() {
   }
 checkColumnForFour()
 
-  //for row of Three
   function checkRowForThree() {
     for (i = 0; i < 61; i ++) {
       let rowOfThree = [i, i+1, i+2]
@@ -161,7 +151,6 @@ checkColumnForFour()
   }
   checkRowForThree()
 
-//for column of Three
   function checkColumnForThree() {
     for (i = 0; i < 47; i ++) {
       let columnOfThree = [i, i+width, i+width*2]
@@ -179,7 +168,6 @@ checkColumnForFour()
   }
 checkColumnForThree()
 
-// Checks carried out indefintely - Add Butotn to clear interval for best practise
 window.setInterval(function(){
     checkRowForFour()
     checkColumnForFour()
